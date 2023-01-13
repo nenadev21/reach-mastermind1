@@ -6,6 +6,7 @@ const UserGuesses = ({ random }) => {
   const [posAndNumMatch, setPosAndNumMatch] = useState('');
   const [numMatch, setNumMatch] = useState('');
   //note before commiting to main
+  //note after running git init
 
   function checkEntry(guess, code) {
     let correctPosAndNum = 0;
