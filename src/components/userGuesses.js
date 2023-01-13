@@ -7,6 +7,7 @@ const UserGuesses = ({ random }) => {
   const [numMatch, setNumMatch] = useState('');
   //note before commiting to main
   //note after running git init
+  //note after creating remote repository
 
   function checkEntry(guess, code) {
     let correctPosAndNum = 0;
