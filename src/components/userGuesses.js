@@ -5,6 +5,7 @@ const UserGuesses = ({ random }) => {
   const [entries, setEntries] = useState([]);
   const [posAndNumMatch, setPosAndNumMatch] = useState('');
   const [numMatch, setNumMatch] = useState('');
+  //note before commiting to main
 
   function checkEntry(guess, code) {
     let correctPosAndNum = 0;
