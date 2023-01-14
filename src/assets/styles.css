@@ -1,23 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&family=Open+Sans:wght@300;400&display=swap');
 
-@media only screen and (max-width: 767px) {
-  .mobile-box {
-    background: rgba(0, 0, 0, 0.5);
-    padding: 15px;
-  }
-}
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Open+Sans:wght@300;400&family=Rubik+Moonrocks&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Limelight&family=Open+Sans:wght@300;400&family=Rubik+Moonrocks&display=swap');
 
 *,
 ::before,
 ::after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Lato' sans-serif;
 }
 
 .home-container {
+  margin: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 50px;
 }
 
 .home-btn-wrapper {
@@ -27,10 +30,27 @@
   margin: 20px;
 }
 
+.game-title-container {
+  margin-bottom: 50px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.game-title-container .logo {
+  font-family: 'Limelight', cursive;
+  font-size: 80px;
+  margin-bottom: auto;
+}
+
+.instructions {
+  margin-top: 30px;
+}
+
 .game-container {
-  font-family: 'Raleway' sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 50px;
+  position: relative;
 }

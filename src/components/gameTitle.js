@@ -1,15 +1,14 @@
 import React from 'react';
 import { Header, Icon } from 'semantic-ui-react';
+import '../assets/styles.css';
 
 const GameTitle = () => {
   return (
-    <>
-      <Header as='h2' icon textAlign='center'>
-        <Icon name='lock' color='purple' size='huge' />
-        <Header.Content>Mastermind</Header.Content>
-        <Header.Subheader>Hack the code, grow your mind.</Header.Subheader>
-      </Header>
-    </>
+    <div className='game-title-container'>
+      <Icon name='lock' color='purple' size='huge' />
+      <h1 className='logo'>Raise!</h1>
+      <p>Hack the code, grow your mind.</p>
+    </div>
   );
 };
 

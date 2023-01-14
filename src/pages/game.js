@@ -21,15 +21,14 @@ import UserGuesses from '../components/userGuesses';
 const Game = () => {
   const [random, setRandom] = useState([]);
 
-  //I deleted strict mode under index.js because it was calling the api twice and changing the random number on screen
+  //TODO: move the apiCall into its own file and import it here
   useEffect(() => {
-    //TODO: move the apiCall into its own file and import it here
     axios
       .get(
         'https://www.random.org/integers/?num=4&min=0&max=7&col=1&base=10&format=plain&rnd=new'
       )
       .then((res) => {
-        const editTxtToArr = (txt) => txt.replace(/\n/g, '').split('');
+        const editTxtToArr = (txt) => txt.trim().replace(/\n/g, '').split('');
         const editedData = editTxtToArr(res.data);
         setRandom(editedData);
       })

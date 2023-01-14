@@ -5,7 +5,17 @@ const UserGuesses = ({ random }) => {
   const [entries, setEntries] = useState([]);
   const [posAndNumMatch, setPosAndNumMatch] = useState('');
   const [numMatch, setNumMatch] = useState('');
-  //fixed issue
+
+  const options = [
+    { key: '0', text: '0', value: '0' },
+    { key: '1', text: '1', value: '1' },
+    { key: '2', text: '2', value: '2' },
+    { key: '3', text: '3', value: '3' },
+    { key: '4', text: '4', value: '4' },
+    { key: '5', text: '5', value: '5' },
+    { key: '6', text: '6', value: '6' },
+    { key: '7', text: '7', value: '7' },
+  ];
 
   function checkEntry(guess, code) {
     let correctPosAndNum = 0;
@@ -47,28 +57,20 @@ const UserGuesses = ({ random }) => {
   return (
     <div className='user-guesses-container'>
       <Form onSubmit={handleSubmit}>
-        <Form.Group inline>
-          <Form.Field>
-            <Input />
-          </Form.Field>
-          <Form.Field>
-            <Input />
-          </Form.Field>
-          <Form.Field>
-            <Input />
-          </Form.Field>
-          <Form.Field>
-            <Input />
-          </Form.Field>
+        <Form.Group widths='equal' inline>
+          <Form.Select options={options} />
+          <Form.Select options={options} />
+          <Form.Select options={options} />
+          <Form.Select options={options} />
         </Form.Group>
         <Button type='submit' color='green' size='big'>
           Check Answers
         </Button>
-        <div className='secondary-action-btn'>
-          <Button>Clear</Button>
-          <Button>Restart</Button>
-        </div>
       </Form>
+      <div className='secondary-action-btn'>
+        <Button>Clear</Button>
+        <Button>Restart</Button>
+      </div>
     </div>
   );
 };

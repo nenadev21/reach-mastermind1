@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Icon } from 'semantic-ui-react';
+import { Grid, Icon, Label } from 'semantic-ui-react';
 
 const Feedback = () => {
   return (
@@ -9,17 +9,19 @@ const Feedback = () => {
         <Grid.Row>
           <Grid.Column>3456</Grid.Column>
           <Grid.Column columns={2}>
-            <Icon name='star' color='green' />
-            <Icon name='star' color='orange' />
+            <Label color='green' circular>
+              1
+            </Label>
           </Grid.Column>
         </Grid.Row>
       </Grid>
       <Grid columns={2} divided>
         <Grid.Row>
-          <Grid.Column>1234</Grid.Column>
+          <Grid.Column>4455</Grid.Column>
           <Grid.Column columns={2}>
-            <Icon name='star' color='green' />
-            <Icon name='star' color='orange' />
+            <Label color='green' circular>
+              1
+            </Label>
           </Grid.Column>
         </Grid.Row>
       </Grid>
