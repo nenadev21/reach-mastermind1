@@ -30,6 +30,11 @@ body {
   margin: 20px;
 }
 
+.home-btn {
+  width: 150px;
+  height: 40px;
+}
+
 .game-title-container {
   margin-bottom: 50px;
   align-items: center;
@@ -43,14 +48,19 @@ body {
   margin-bottom: auto;
 }
 
-.instructions {
-  margin-top: 30px;
-}
-
 .game-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 50px;
   position: relative;
+}
+
+.instructions {
+  margin: 20px;
+}
+
+.past-responses-container,
+.attempts-count-container {
+  margin: 50px;
 }

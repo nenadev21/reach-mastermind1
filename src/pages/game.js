@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Header } from 'semantic-ui-react';
 import SecretCode from '../components/secretCode';
-import Feedback from '../components/feedback';
-import SideHelper from '../components/sideHelper';
+import PastResponses from '../components/pastResponses';
 import UserGuesses from '../components/userGuesses';
+import AttempsCount from '../components/attempsCount';
 
 //steps:
 //computer pick a random number
@@ -44,9 +44,9 @@ const Game = () => {
         content='Hi! The secret code is ready. It is time to play. Good luck!'
       />
       <SecretCode />
-      <SideHelper />
+      <AttempsCount />
       <UserGuesses random={random} />
-      <Feedback />
+      <PastResponses />
     </div>
   );
 };

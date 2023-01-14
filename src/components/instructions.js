@@ -17,7 +17,7 @@ const Instructions = () => {
           </a>
         </span>
         , a code breaking game. It helps you train your brain by improving your
-        focus and logic skills
+        focus and logic skills.
       </p>
       <List>
         <List.Item as='a'>
@@ -56,6 +56,13 @@ const Instructions = () => {
       <p>
         Here I can add some examples similar to the ones that will be displayed
         during the game and explain the reasoning
+      </p>
+      <Header as='h4'>Get rewards</Header>
+      <p>
+        When you discover the secret code in fewer attempts that will make you
+        win more points. You can win until 10 points on each match. You will get
+        10 points if you solve the game in just one go. If you solve the game in
+        the last attemp you will get 10 points.
       </p>
     </div>
   );

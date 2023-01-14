@@ -14,21 +14,31 @@ const Home = () => {
     <div className='home-container'>
       <GameTitle />
       <section className='home-btns'>
-        <Button
-          color='teal'
-          onClick={() => setDisplayInstructions(!displayInstructions)}
-        >
-          How to Play
-        </Button>
+        <Link className='home-btn-wrapper'>
+          <Button
+            className='home-btn'
+            basic
+            color='violet'
+            onClick={() => setDisplayInstructions(!displayInstructions)}
+          >
+            How to Play
+          </Button>
+        </Link>
         {displayInstructions && <Instructions />}
         <Link to='/game' className='home-btn-wrapper'>
-          <Button color='purple'>Play</Button>
+          <Button className='home-btn' color='purple'>
+            Play
+          </Button>
         </Link>
         <Link className='home-btn-wrapper'>
-          <Button color='blue'>Rewards</Button>
+          <Button className='home-btn' basic color='violet'>
+            Rewards
+          </Button>
         </Link>
         <Link className='home-btn-wrapper'>
-          <Button color='violet'>Settings</Button>
+          <Button className='home-btn' basic color='violet'>
+            Settings
+          </Button>
         </Link>
       </section>
     </div>

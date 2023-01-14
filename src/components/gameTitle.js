@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Icon } from 'semantic-ui-react';
+import { Icon } from 'semantic-ui-react';
 import '../assets/styles.css';
 
 const GameTitle = () => {
@@ -7,7 +7,7 @@ const GameTitle = () => {
     <div className='game-title-container'>
       <Icon name='lock' color='purple' size='huge' />
       <h1 className='logo'>Raise!</h1>
-      <p>Hack the code, grow your mind.</p>
+      <p>Hack the code, sharp your mind.</p>
     </div>
   );
 };
