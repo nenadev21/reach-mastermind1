@@ -59,9 +59,6 @@ const Game = () => {
     playNewGame();
   }, []);
 
-  console.log('random', random);
-  console.log('count', count);
-
   const increment = (pos) => {
     // se itera el arreglo y solo se modifica el número de la posición recibida como argumento
     // por ejemplo si pos = 2, se deberia modificar solo el tercer el elemento del arreglo
@@ -72,40 +69,80 @@ const Game = () => {
   };
 
   //It needs to account for when random OR count has repeated numbers.
-  const compareCountVsRand = (count, random) => {
-    let correctPosAndNum = 0;
-    let correctNumOnly = 0;
-    let randomCopy = [...random];
+  // const compareCountVsRand = (count, random) => {
+  //   let correctPosAndNum = 0;
+  //   let correctNumOnly = 0;
+  //   let randomCopy = [...random];
 
-    //loop through the count array
-    for (let i = 0; i < count.length; i++) {
-      if (count[i] == random[i]) {
-        correctPosAndNum++;
-        randomCopy[i] = null;
-        console.log('randomCopy', randomCopy);
-      } else {
-        for (let j = 0; j < random.length; j++) {
-          if (j != i && count[i] == random[j]) {
-            //this part isn't working yet when there are repeated numbers either in random or in count
-            correctNumOnly++;
-            break;
-          }
-        }
+  //   //loop through the count array
+  //   for (let i = 0; i < count.length; i++) {
+  //     if (count[i] == random[i]) {
+  //       correctPosAndNum++;
+  //       randomCopy[i] = null;
+  //       console.log('randomCopy', randomCopy);
+  //     } else {
+  //       for (let j = 0; j < random.length; j++) {
+  //         if (j != i && count[i] == random[j]) {
+  //           //this part isn't working yet when there are repeated numbers either in random or in count
+  //           correctNumOnly++;
+  //           break;
+  //         }
+  //       }
+  //     }
+  //   }
+  //   console.log(
+  //     'correctPosAndNum: ',
+  //     correctPosAndNum,
+  //     ' correctNumOnly: ',
+  //     correctNumOnly
+  //   );
+  //   return { correctPosAndNum, correctNumOnly };
+  // };
+
+  function compareArrays(arr1, arr2) {
+    // convert the arrays to sets
+    const set1 = new Set(arr1);
+    const set2 = new Set(arr2);
+    let exactMatches = 0;
+    let matchesByValue = 0;
+    // check if the sets have the same size
+    if (set1.size !== set2.size) {
+      return {
+        match: false,
+        exactMatches: exactMatches,
+        matchesByValue: matchesByValue,
+      };
+    }
+
+    // check if each value in the first array has the same value and position in the second array
+    for (let i = 0; i < arr1.length; i++) {
+      if (arr1[i] == arr2[i]) {
+        exactMatches++;
+      } else if (set2.has(arr1[i])) {
+        matchesByValue++;
       }
     }
-    console.log(
-      'correctPosAndNum: ',
-      correctPosAndNum,
-      ' correctNumOnly: ',
-      correctNumOnly
-    );
-    return { correctPosAndNum, correctNumOnly };
-  };
+
+    // if all checks pass, the arrays are a match
+    const result = {
+      match: true,
+      exactMatches: exactMatches,
+      matchesByValue: matchesByValue,
+    };
+    console.log('hola');
+    console.log(result);
+    return result;
+  }
+
+  // const arr1 = [1, 2, 2, 4, 5];
+  // const arr2 = ['1', 3, 0, 2, 2];
+  // compareArrays(arr1, arr2);
 
   const submitNumber = () => {
-    setCount(count);
     setRecords((records) => [count, ...records]);
-    compareCountVsRand(count, random);
+    const comparison1 = compareArrays(count, random);
+    console.log(comparison1);
+    //I'm having an error that supposed to mean that I'm passing objects as arguments instead of arrays. When I see the console it says it's an array but  when I use type of it says it's an object
   };
 
   return (
