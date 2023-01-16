@@ -6,18 +6,16 @@ import { Icon } from 'semantic-ui-react';
 
 const SecretCode = ({ random }) => {
   return (
-    <>
-      <ul>
-        {random.map((item, index) => (
-          <Icon
-            key={`ran-${index}`}
-            name='question circle'
-            color='purple'
-            size='big'
-          />
-        ))}
-      </ul>
-    </>
+    <ul>
+      {random.map((item, index) => (
+        <Icon
+          key={`ran-${index}`}
+          name='question circle'
+          color='purple'
+          size='big'
+        />
+      ))}
+    </ul>
   );
 };
 

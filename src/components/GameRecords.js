@@ -15,7 +15,7 @@ const GameRecords = ({ records }) => {
     );
   };
   return (
-    <div style={{ margin: 0 }}>
+    <div>
       <Table basic='very' celled collapsing>
         {records.length > 0 ? <TableFirstRow /> : ``}
         {records.map((record, index) => (

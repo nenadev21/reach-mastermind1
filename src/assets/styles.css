@@ -60,11 +60,6 @@ body {
   margin: 20px;
 }
 
-.past-responses-container,
-.attempts-count-container {
-  margin: 50px;
-}
-
 .user-guesses-container {
   display: flex;
   align-items: center;
@@ -80,4 +75,5 @@ body {
 
 .confirmation-btns {
   display: flex;
+  padding-bottom: 40px;
 }

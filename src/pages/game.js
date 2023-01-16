@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Header, Loader, Icon, Button } from 'semantic-ui-react';
 import SecretCode from '../components/secretCode';
 import GameRecords from '../components/GameRecords';
+import AttempsCount from '../components/attempsCount';
 import { getRandomNumber } from '../callApi';
 import { MAX_ATTEMPTS, num } from '../config';
 
@@ -42,8 +43,6 @@ const Game = () => {
   const [records, setRecords] = useState([]);
   const [endGame, setEndGame] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [rightPosAndNum, setRightPosAndNum] = useState(0);
-  const [rightNumOnly, setRightNumOnly] = useState(0);
 
   const playNewGame = async () => {
     setIsLoading(true);
@@ -105,7 +104,7 @@ const Game = () => {
 
   const submitNumber = () => {
     setCount(count);
-    // setRecords((records) => [count, ...records]);
+    setRecords((records) => [count, ...records]);
     compareCountVsRand(count, random);
   };
 
@@ -123,9 +122,12 @@ const Game = () => {
           )
         }
       />
-      {/* <AttempsCount /> */}
-      <SecretCode random={random} />
-
+      <section>
+        <SecretCode random={random} />
+      </section>
+      <section style={{ paddingTop: '5px' }}>
+        <AttempsCount attempsLeft={MAX_ATTEMPTS - records.length} />
+      </section>
       <div style={{ display: 'flex' }} className='user-guesses-container'>
         {count.map((c, index) => (
           <Counter
@@ -147,6 +149,7 @@ const Game = () => {
           Play New Game
         </Button>
       </div>
+
       <GameRecords records={records} />
     </div>
   );
