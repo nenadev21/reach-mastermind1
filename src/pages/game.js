@@ -1,11 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Header } from 'semantic-ui-react';
+import { Header, Loader, Icon, Button } from 'semantic-ui-react';
 import SecretCode from '../components/secretCode';
-import PastResponses from '../components/pastResponses';
-import UserGuesses from '../components/userGuesses';
-import AttempsCount from '../components/attempsCount';
+import GameRecords from '../components/GameRecords';
+import { getRandomNumber } from '../callApi';
+import { MAX_ATTEMPTS, num } from '../config';
 
+const Counter = ({ count, increment, decrement }) => {
+  return (
+    <article className='number-wrap'>
+      <Header as='h1' content={count} />
+      <Button.Group icon size='small'>
+        <Button onClick={decrement} disabled={count <= 0}>
+          <Icon name='minus' />
+        </Button>
+        <Button onClick={increment} disabled={count >= 7}>
+          <Icon name='plus' />
+        </Button>
+      </Button.Group>
+    </article>
+  );
+};
 //steps:
 //computer pick a random number
 //random number gets stored in variable
@@ -17,36 +31,123 @@ import AttempsCount from '../components/attempsCount';
 //app identify  similarity and location
 //app gives feedback
 //lock unlocks if code has been guessed
+//TODO: right now the play new game btn stays disabled until player wins. It needs to be possible for player to start a new game at any time
+//TODO: Check why each time a number changes before submitting answer the function is executed again - line 60
 
 const Game = () => {
   const [random, setRandom] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  //count can be change for choice because it will be the complete guess
+  const [count, setCount] = useState([0, 0, 0, 0]);
+  const [records, setRecords] = useState([]);
+  const [endGame, setEndGame] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [rightPosAndNum, setRightPosAndNum] = useState(0);
+  const [rightNumOnly, setRightNumOnly] = useState(0);
 
-  //TODO: move the apiCall into its own file and import it here
+  const playNewGame = async () => {
+    setIsLoading(true);
+    const getNewRandom = await getRandomNumber();
+    setRandom(getNewRandom);
+    setIsLoading(false);
+    setRecords([]);
+    setCount([0, 0, 0, 0]);
+    setEndGame(false);
+    setIsLoading(false);
+  };
+
   useEffect(() => {
-    axios
-      .get(
-        'https://www.random.org/integers/?num=4&min=0&max=7&col=1&base=10&format=plain&rnd=new'
-      )
-      .then((res) => {
-        const editTxtToArr = (txt) => txt.trim().replace(/\n/g, '').split('');
-        const editedData = editTxtToArr(res.data);
-        setRandom(editedData);
-      })
-      .catch((err) => console.log(err));
+    playNewGame();
   }, []);
 
   console.log('random', random);
+  console.log('count', count);
+
+  const increment = (pos) => {
+    // se itera el arreglo y solo se modifica el número de la posición recibida como argumento
+    // por ejemplo si pos = 2, se deberia modificar solo el tercer el elemento del arreglo
+    setCount((count) => count.map((c, index) => (index === pos ? c + 1 : c)));
+  };
+  const decrement = (pos) => {
+    setCount((count) => count.map((c, index) => (index === pos ? c - 1 : c)));
+  };
+
+  //It needs to account for when random OR count has repeated numbers.
+  const compareCountVsRand = (count, random) => {
+    let correctPosAndNum = 0;
+    let correctNumOnly = 0;
+    let randomCopy = [...random];
+
+    //loop through the count array
+    for (let i = 0; i < count.length; i++) {
+      if (count[i] == random[i]) {
+        correctPosAndNum++;
+        randomCopy[i] = null;
+        console.log('randomCopy', randomCopy);
+      } else {
+        for (let j = 0; j < random.length; j++) {
+          if (j != i && count[i] == random[j]) {
+            //this part isn't working yet when there are repeated numbers either in random or in count
+            correctNumOnly++;
+            break;
+          }
+        }
+      }
+    }
+    console.log(
+      'correctPosAndNum: ',
+      correctPosAndNum,
+      ' correctNumOnly: ',
+      correctNumOnly
+    );
+    return { correctPosAndNum, correctNumOnly };
+  };
+
+  const submitNumber = () => {
+    setCount(count);
+    // setRecords((records) => [count, ...records]);
+    compareCountVsRand(count, random);
+  };
 
   return (
     <div className='game-container'>
       <Header
-        as='h3'
-        content='Hi! The secret code is ready. It is time to play. Good luck!'
+        as='h4'
+        content={
+          isLoading ? (
+            <>
+              <Loader active inline='centered' />
+            </>
+          ) : (
+            `Find out the secret ${num}-digit code. Start playing!`
+          )
+        }
       />
-      <SecretCode />
-      <AttempsCount />
-      <UserGuesses random={random} />
-      <PastResponses />
+      {/* <AttempsCount /> */}
+      <SecretCode random={random} />
+
+      <div style={{ display: 'flex' }} className='user-guesses-container'>
+        {count.map((c, index) => (
+          <Counter
+            count={c}
+            increment={() => increment(index)}
+            decrement={() => decrement(index)}
+          />
+        ))}
+      </div>
+      <div className='confirmation-btns'>
+        <Button
+          color='purple'
+          onClick={submitNumber}
+          disabled={records.length >= MAX_ATTEMPTS || endGame}
+        >
+          Check Answer
+        </Button>
+        <Button color='violet' basic onClick={playNewGame}>
+          Play New Game
+        </Button>
+      </div>
+      <GameRecords records={records} />
     </div>
   );
 };

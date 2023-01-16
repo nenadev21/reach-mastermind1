@@ -1,16 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Icon } from 'semantic-ui-react';
 
 //component will display secret code once user discover it
+//componet will change icon when game is successful
 
-const SecretCode = () => {
+const SecretCode = ({ random }) => {
   return (
-    <div>
-      <Icon circular color='teal' name='lock' />
-      <Icon circular color='teal' name='lock' />
-      <Icon circular color='teal' name='lock' />
-      <Icon circular color='teal' name='lock' />
-    </div>
+    <>
+      <ul>
+        {random.map((item, index) => (
+          <Icon
+            key={`ran-${index}`}
+            name='question circle'
+            color='purple'
+            size='big'
+          />
+        ))}
+      </ul>
+    </>
   );
 };
 

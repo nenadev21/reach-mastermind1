@@ -17,7 +17,7 @@ body {
 }
 
 .home-container {
-  margin: 50px;
+  padding: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -63,4 +63,21 @@ body {
 .past-responses-container,
 .attempts-count-container {
   margin: 50px;
+}
+
+.user-guesses-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 10px;
+}
+
+.number-wrap {
+  margin: 5px;
+}
+
+.confirmation-btns {
+  display: flex;
 }
