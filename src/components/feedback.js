@@ -11,23 +11,23 @@ const Feedback = ({ exactMatches, matchesByValue }) => {
       <div>
         <span className='feedback-count'>{exactMatches}</span>
         <span>
-          Number
+          number
           <Icon name='checkmark' size='small' color='green' />{' '}
         </span>{' '}
         <span>
           {' '}
-          Position <Icon name='checkmark' size='small' color='green' />
+          position <Icon name='checkmark' size='small' color='green' />
         </span>
       </div>
       <div>
         <span className='feedback-count'>{matchesByValue}</span>
         <span>
-          Number
+          number
           <Icon name='checkmark' size='small' color='green' />{' '}
         </span>{' '}
         <span>
           {' '}
-          Position <Icon name='close' size='small' color='red' />
+          position <Icon name='close' size='small' color='red' />
         </span>
       </div>
     </>
