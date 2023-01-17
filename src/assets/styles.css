@@ -77,3 +77,9 @@ body {
   display: flex;
   padding-bottom: 40px;
 }
+
+.feedback-count {
+  font-weight: 900;
+  color: 'purple';
+  padding-right: 5px;
+}

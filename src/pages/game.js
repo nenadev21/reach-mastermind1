@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Header, Loader, Icon, Button } from 'semantic-ui-react';
+import { Header, Loader, Icon, Button, Message } from 'semantic-ui-react';
 import SecretCode from '../components/secretCode';
 import GameRecords from '../components/GameRecords';
 import AttempsCount from '../components/attempsCount';
@@ -90,10 +90,7 @@ const Game = () => {
       matchesByValue: matchesByValue,
     };
     setExactMatches(exactMatches);
-    if (exactMatches === count.length) {
-      alert('you won!');
-      setEndGame(true);
-    }
+    // setEndGame(true);
     setMatchesByValue(matchesByValue);
     console.log(result);
     return result;
@@ -102,11 +99,7 @@ const Game = () => {
   const submitNumber = () => {
     setRecords((records) => [count, ...records]);
     const countToArrOfStr = [...count.join('').split('')];
-    // console.log(countToArrStrings);
     console.log('random:', random);
-    // console.log('is this working?');
-    // const fakeCount = ['3', '2', '1', '5'];
-    // const fakeRandom = ['3', '2', 5, 1];
     const comparison1 = compareArrays(countToArrOfStr, random);
     console.log(comparison1);
   };
@@ -152,8 +145,19 @@ const Game = () => {
           Play New Game
         </Button>
       </div>
+      <div>
+        {exactMatches === random.length ? (
+          <Message floating compact positive content='WOW You are a winner!' />
+        ) : (
+          <Message content='keep trying' />
+        )}
+      </div>
 
-      <GameRecords records={records} />
+      <GameRecords
+        records={records}
+        exactMatches={exactMatches}
+        matchesByValue={matchesByValue}
+      />
     </div>
   );
 };
