@@ -42,7 +42,8 @@ const Game = () => {
   const [count, setCount] = useState([0, 0, 0, 0]);
   const [records, setRecords] = useState([]);
   const [endGame, setEndGame] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const [exactMatches, setExactMatches] = useState(0);
+  const [matchesByValue, setMatchesByValue] = useState(0);
 
   const playNewGame = async () => {
     setIsLoading(true);
@@ -68,81 +69,46 @@ const Game = () => {
     setCount((count) => count.map((c, index) => (index === pos ? c - 1 : c)));
   };
 
-  //It needs to account for when random OR count has repeated numbers.
-  // const compareCountVsRand = (count, random) => {
-  //   let correctPosAndNum = 0;
-  //   let correctNumOnly = 0;
-  //   let randomCopy = [...random];
-
-  //   //loop through the count array
-  //   for (let i = 0; i < count.length; i++) {
-  //     if (count[i] == random[i]) {
-  //       correctPosAndNum++;
-  //       randomCopy[i] = null;
-  //       console.log('randomCopy', randomCopy);
-  //     } else {
-  //       for (let j = 0; j < random.length; j++) {
-  //         if (j != i && count[i] == random[j]) {
-  //           //this part isn't working yet when there are repeated numbers either in random or in count
-  //           correctNumOnly++;
-  //           break;
-  //         }
-  //       }
-  //     }
-  //   }
-  //   console.log(
-  //     'correctPosAndNum: ',
-  //     correctPosAndNum,
-  //     ' correctNumOnly: ',
-  //     correctNumOnly
-  //   );
-  //   return { correctPosAndNum, correctNumOnly };
-  // };
-
   function compareArrays(arr1, arr2) {
     // convert the arrays to sets
     const set1 = new Set(arr1);
     const set2 = new Set(arr2);
     let exactMatches = 0;
     let matchesByValue = 0;
-    // check if the sets have the same size
-    if (set1.size !== set2.size) {
-      return {
-        match: false,
-        exactMatches: exactMatches,
-        matchesByValue: matchesByValue,
-      };
-    }
-
     // check if each value in the first array has the same value and position in the second array
     for (let i = 0; i < arr1.length; i++) {
       if (arr1[i] == arr2[i]) {
         exactMatches++;
-      } else if (set2.has(arr1[i])) {
+      } else if (set1.has(arr2[i])) {
         matchesByValue++;
       }
     }
-
     // if all checks pass, the arrays are a match
     const result = {
       match: true,
       exactMatches: exactMatches,
       matchesByValue: matchesByValue,
     };
-    console.log('hola');
+    setExactMatches(exactMatches);
+    if (exactMatches === count.length) {
+      alert('you won!');
+      setEndGame(true);
+    }
+    setMatchesByValue(matchesByValue);
     console.log(result);
     return result;
   }
 
-  // const arr1 = [1, 2, 2, 4, 5];
-  // const arr2 = ['1', 3, 0, 2, 2];
-  // compareArrays(arr1, arr2);
-
   const submitNumber = () => {
     setRecords((records) => [count, ...records]);
-    const comparison1 = compareArrays(count, random);
+    const countToArrOfStr = [...count.join('').split('')];
+    // console.log(countToArrStrings);
+    console.log('random:', random);
+    // console.log('is this working?');
+    // const fakeCount = ['3', '2', '1', '5'];
+    // const fakeRandom = ['3', '2', 5, 1];
+    const comparison1 = compareArrays(countToArrOfStr, random);
     console.log(comparison1);
-    //I'm having an error that supposed to mean that I'm passing objects as arguments instead of arrays. When I see the console it says it's an array but  when I use type of it says it's an object
   };
 
   return (
