@@ -5,6 +5,7 @@ import GameRecords from '../components/GameRecords';
 import AttempsCount from '../components/attempsCount';
 import { getRandomNumber } from '../callApi';
 import { MAX_ATTEMPTS, num } from '../config';
+import { compareGuessVsRandom } from '../utils/compareGuessVsRandom';
 
 const Counter = ({ count, increment, decrement }) => {
   return (
@@ -42,8 +43,6 @@ const Game = () => {
   const [count, setCount] = useState([0, 0, 0, 0]);
   const [records, setRecords] = useState([]);
   const [endGame, setEndGame] = useState(false);
-  const [exactMatches, setExactMatches] = useState(0);
-  const [matchesByValue, setMatchesByValue] = useState(0);
 
   const playNewGame = async () => {
     setIsLoading(true);
@@ -69,38 +68,11 @@ const Game = () => {
     setCount((count) => count.map((c, index) => (index === pos ? c - 1 : c)));
   };
 
-  function compareArrays(arr1, arr2) {
-    // convert the arrays to sets
-    const set1 = new Set(arr1);
-    const set2 = new Set(arr2);
-    let exactMatches = 0;
-    let matchesByValue = 0;
-    // check if each value in the first array has the same value and position in the second array
-    for (let i = 0; i < arr1.length; i++) {
-      if (arr1[i] == arr2[i]) {
-        exactMatches++;
-      } else if (set1.has(arr2[i])) {
-        matchesByValue++;
-      }
-    }
-    // if all checks pass, the arrays are a match
-    const result = {
-      match: true,
-      exactMatches: exactMatches,
-      matchesByValue: matchesByValue,
-    };
-    setExactMatches(exactMatches);
-    // setEndGame(true);
-    setMatchesByValue(matchesByValue);
-    console.log(result);
-    return result;
-  }
-
   const submitNumber = () => {
     setRecords((records) => [count, ...records]);
     const countToArrOfStr = [...count.join('').split('')];
     console.log('random:', random);
-    const comparison1 = compareArrays(countToArrOfStr, random);
+    const comparison1 = compareGuessVsRandom(countToArrOfStr, random);
     console.log(comparison1);
   };
 
@@ -127,6 +99,7 @@ const Game = () => {
       <div style={{ display: 'flex' }} className='user-guesses-container'>
         {count.map((c, index) => (
           <Counter
+            key={index}
             count={c}
             increment={() => increment(index)}
             decrement={() => decrement(index)}
@@ -145,19 +118,15 @@ const Game = () => {
           Play New Game
         </Button>
       </div>
-      <div>
+      {/* <div>
         {exactMatches === random.length ? (
           <Message floating compact positive content='WOW You are a winner!' />
         ) : (
           <Message content='keep trying' />
         )}
-      </div>
+      </div> */}
 
-      <GameRecords
-        records={records}
-        exactMatches={exactMatches}
-        matchesByValue={matchesByValue}
-      />
+      <GameRecords records={records} />
     </div>
   );
 };
