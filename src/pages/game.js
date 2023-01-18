@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Header, Loader, Icon, Button, Message } from 'semantic-ui-react';
 import SecretCode from '../components/secretCode';
-import GameRecords from '../components/GameRecords';
+import GameRecords from '../components/gameRecords';
 import AttempsCount from '../components/attempsCount';
 import { getRandomNumber } from '../callApi';
 import { MAX_ATTEMPTS, num } from '../config';
@@ -69,11 +69,15 @@ const Game = () => {
   };
 
   const submitNumber = () => {
-    setRecords((records) => [count, ...records]);
     const countToArrOfStr = [...count.join('').split('')];
+    const { gameMatch, perfectMatch, equalValues } = compareGuessVsRandom(
+      countToArrOfStr,
+      random
+    );
+    const record = { value: count, gameMatch, perfectMatch, equalValues };
+    console.log(record.gameMatch);
+    setRecords((records) => [record, ...records]);
     console.log('random:', random);
-    const comparison1 = compareGuessVsRandom(countToArrOfStr, random);
-    console.log(comparison1);
   };
 
   return (
@@ -126,7 +130,7 @@ const Game = () => {
         )}
       </div> */}
 
-      <GameRecords records={records} />
+      <GameRecords records={records} random={random} />
     </div>
   );
 };

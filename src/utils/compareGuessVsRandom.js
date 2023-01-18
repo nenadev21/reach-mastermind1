@@ -23,3 +23,13 @@ export function compareGuessVsRandom(guesses, random) {
     equalValues: equalValues,
   };
 }
+
+const rand = ['0', '1', '3', '5'];
+const guesses1 = [2, 2, 4, 6]; //game responds “all incorrect”
+const guesses2 = [0, 2, 4, 6]; //game responds “1 correct number and 1 correct location”
+const guesses3 = [2, 2, 1, 1]; //game responds “1 correct number and 0 correct location”
+const guesses4 = [0, 1, 5, 6]; //game responds “3 correct numbers and 2 correct location”
+// console.log(compareGuessVsRandom(guesses1, rand));
+// console.log(compareGuessVsRandom(guesses2, rand));
+// console.log(compareGuessVsRandom(guesses3, rand));
+// console.log(compareGuessVsRandom(guesses4, rand));

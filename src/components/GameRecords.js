@@ -3,12 +3,12 @@ import { Table, Icon, Header } from 'semantic-ui-react';
 import Feedback from './feedback';
 import '../assets/styles.css';
 
-const GameRecords = ({ records, exactMatches, matchesByValue }) => {
+const GameRecords = ({ records, random }) => {
   const TableFirstRow = () => {
     return (
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell>Answer</Table.HeaderCell>
+          <Table.HeaderCell>Your Answers</Table.HeaderCell>
           <Table.HeaderCell>Feedback</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
@@ -21,12 +21,15 @@ const GameRecords = ({ records, exactMatches, matchesByValue }) => {
         {records.map((record, index) => (
           <Table.Body key={`recor-table-${index}`}>
             <Table.Row>
-              <Table.Cell>{record}</Table.Cell>
+              <Table.Cell style={{ letterSpacing: '0.5rem' }}>
+                {record.value}
+              </Table.Cell>
               <Table.Cell>
                 <Feedback
-                  records={records}
-                  exactMatches={exactMatches}
-                  matchesByValue={matchesByValue}
+                  random={random}
+                  allAreCorrect={record.gameMatch}
+                  perfectMatch={record.perfectMatch}
+                  equalValues={record.equalValues}
                 />
               </Table.Cell>
             </Table.Row>
