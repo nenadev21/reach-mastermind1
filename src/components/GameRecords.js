@@ -18,8 +18,9 @@ const GameRecords = ({ records, random }) => {
               <Feedback
                 random={random}
                 gameMatch={record.gameMatch}
-                perfectMatch={record.perfectMatch}
-                equalValues={record.equalValues}
+                allIncorrect={record.allIncorrect}
+                correctNumberCount={record.correctNumberCount}
+                correctPositionCount={record.correctPositionCount}
               />
             </List.Content>
           </List.Item>

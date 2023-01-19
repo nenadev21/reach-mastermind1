@@ -11,7 +11,13 @@ import '../assets/styles.css';
 // “1 correct number and 0 correct location” // = equalValues
 // “3 correct numbers and 2 correct location” // = perfect+equal , perfect
 
-const Feedback = ({ random, gameMatch, perfectMatch, equalValues }) => {
+const Feedback = ({
+  random,
+  gameMatch,
+  allIncorrect,
+  correctNumberCount,
+  correctPositionCount,
+}) => {
   // const correctNumbersTotal = perfectMatch + equalValues;
   if (gameMatch) {
     return (
@@ -19,7 +25,7 @@ const Feedback = ({ random, gameMatch, perfectMatch, equalValues }) => {
         <Header disabled as='h5' content='Congrats! You hacked the code' />
       </div>
     );
-  } else if (perfectMatch === 0 && equalValues === 0) {
+  } else if (allIncorrect) {
     return (
       <div>
         <Header disabled as='h5' content='All are incorrect' />;
@@ -31,7 +37,7 @@ const Feedback = ({ random, gameMatch, perfectMatch, equalValues }) => {
         <Header
           disabled
           as='h5'
-          content={`${equalValues} correct numbers and ${+perfectMatch} correct
+          content={`${correctNumberCount} correct numbers and ${correctPositionCount} correct
         location`}
         />
       </div>
