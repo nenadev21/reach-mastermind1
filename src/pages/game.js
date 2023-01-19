@@ -67,7 +67,6 @@ const Game = () => {
             </>
           ) : (
             <Header
-              as='h3'
               content={`Start guessing the ${num} digits of the secret code. Numbers are from 0 to 7 and repeats are allowed.`}
             />
           )
