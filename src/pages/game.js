@@ -6,7 +6,7 @@ import AttempsCount from '../components/attempsCount';
 import Counter from '../components/counter';
 import { getRandomNumber } from '../callApi';
 import { MAX_ATTEMPTS, num } from '../config';
-import { compareGuessVsRandom3 } from '../utils/compareGuessVsRandom';
+import { compareGuessVsRandom } from '../utils/compareGuessVsRandom';
 import '../assets/styles.css';
 
 //TODO: right now the play new game btn stays disabled until player wins. It needs to be possible for player to start a new game at any time
@@ -51,7 +51,7 @@ const Game = () => {
       allIncorrect,
       correctNumberCount,
       correctPositionCount,
-    } = compareGuessVsRandom3(countToArrOfStr, random);
+    } = compareGuessVsRandom(countToArrOfStr, random);
     const record = {
       value: count,
       gameMatch,
