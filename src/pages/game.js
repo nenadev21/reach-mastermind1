@@ -5,7 +5,7 @@ import GameRecordsNew from '../components/gameRecords';
 import AttempsCount from '../components/attempsCount';
 import Counter from '../components/counter';
 import { getRandomNumber } from '../callApi';
-import { MAX_ATTEMPTS, num } from '../config';
+import { MAX_ATTEMPTS } from '../config';
 import { compareGuessVsRandom } from '../utils/compareGuessVsRandom';
 import '../assets/styles.css';
 
@@ -22,7 +22,7 @@ const Game = () => {
 
   const playNewGame = async () => {
     setIsLoading(true);
-    const getNewRandom = await getRandomNumber();
+    const getNewRandom = await getRandomNumber(8);
     setRandom(getNewRandom);
     setIsLoading(false);
     setRecords([]);
@@ -60,7 +60,7 @@ const Game = () => {
       correctPositionCount,
     };
     setRecords((records) => [record, ...records]);
-    console.log('random:', random);
+    // console.log('random:', random);
   };
 
   return (
@@ -74,7 +74,8 @@ const Game = () => {
             </>
           ) : (
             <Header
-              content={`Start guessing the ${num} digits of the secret code. Numbers are from 0 to 7 and repeats are allowed.`}
+              as='h3'
+              content={`Guess the secret code. The secret code might have repeats and its numbers go from 0 to 7. You can try 10 different combinations`}
             />
           )
         }

@@ -10,9 +10,9 @@ const GameRecordsNew = ({ records, random }) => {
         <List divided key={`game-rec-${index}`}>
           <List.Item>
             <List.Content>
-              <List.Header className='answer-record'>
+              <List.Header as='h4' className='answer-record'>
                 <Label className='past-record-num' size='large'>
-                  <Header>{record.value}</Header>
+                  <Header as='h5'>{record.value}</Header>
                 </Label>
               </List.Header>
               <Feedback

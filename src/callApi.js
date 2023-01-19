@@ -7,9 +7,9 @@ import { api_URL } from './config';
 
 const editTxtToArr = (txt) => txt.trim().replace(/\n/g, '').split('');
 
-export const getRandomNumber = async () => {
+export const getRandomNumber = async (num = 4) => {
   try {
-    const response = await axios.get(api_URL);
+    const response = await axios.get(api_URL + `&num=${num}`);
     return editTxtToArr(response.data);
   } catch (error) {
     console.error(error);

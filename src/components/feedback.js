@@ -28,7 +28,7 @@ const Feedback = ({
   } else if (allIncorrect) {
     return (
       <div>
-        <Header disabled as='h5' content='All are incorrect' />;
+        <Header disabled as='h5' content='All are incorrect' />
       </div>
     );
   } else {
@@ -37,7 +37,9 @@ const Feedback = ({
         <Header
           disabled
           as='h5'
-          content={`${correctNumberCount} correct numbers and ${correctPositionCount} correct
+          content={`${correctNumberCount} correct number${
+            correctNumberCount >= 2 ? `s` : ''
+          } and ${correctPositionCount} correct
         location`}
         />
       </div>
