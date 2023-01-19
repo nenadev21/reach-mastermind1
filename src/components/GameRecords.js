@@ -1,41 +1,30 @@
 import React from 'react';
-import { Table, Icon, Header } from 'semantic-ui-react';
+import { Label, List, Header } from 'semantic-ui-react';
 import Feedback from './feedback';
 import '../assets/styles.css';
 
 const GameRecords = ({ records, random }) => {
-  const TableFirstRow = () => {
-    return (
-      <Table.Header>
-        <Table.Row>
-          <Table.HeaderCell>Your Answers</Table.HeaderCell>
-          <Table.HeaderCell>Feedback</Table.HeaderCell>
-        </Table.Row>
-      </Table.Header>
-    );
-  };
   return (
     <div>
-      <Table basic='very'>
-        {records.length > 0 ? <TableFirstRow /> : ``}
-        {records.map((record, index) => (
-          <Table.Body key={`recor-table-${index}`}>
-            <Table.Row>
-              <Table.Cell style={{ letterSpacing: '0.5rem' }}>
-                {record.value}
-              </Table.Cell>
-              <Table.Cell>
-                <Feedback
-                  random={random}
-                  allAreCorrect={record.gameMatch}
-                  perfectMatch={record.perfectMatch}
-                  equalValues={record.equalValues}
-                />
-              </Table.Cell>
-            </Table.Row>
-          </Table.Body>
-        ))}
-      </Table>
+      {records.map((record, index) => (
+        <List divided key={`game-rec-${index}`}>
+          <List.Item>
+            <List.Content>
+              <List.Header className='answer-record' as='h4'>
+                <Label className='past-record-num' size='large'>
+                  <Header as='h5'>{record.value}</Header>
+                </Label>
+              </List.Header>
+              <Feedback
+                random={random}
+                gameMatch={record.gameMatch}
+                perfectMatch={record.perfectMatch}
+                equalValues={record.equalValues}
+              />
+            </List.Content>
+          </List.Item>
+        </List>
+      ))}
     </div>
   );
 };

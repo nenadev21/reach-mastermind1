@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Icon } from 'semantic-ui-react';
 
 //component will display secret code once user discover it
@@ -8,12 +8,7 @@ const SecretCode = ({ random }) => {
   return (
     <ul>
       {random.map((item, index) => (
-        <Icon
-          key={`ran-${index}`}
-          name='question circle'
-          color='purple'
-          size='big'
-        />
+        <Icon key={`ran-${index}`} name='lock' color='purple' size='big' />
       ))}
     </ul>
   );

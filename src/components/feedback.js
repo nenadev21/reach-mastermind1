@@ -11,30 +11,32 @@ import '../assets/styles.css';
 // “1 correct number and 0 correct location” // = equalValues
 // “3 correct numbers and 2 correct location” // = perfect+equal , perfect
 
-const FeedbackBasedOnAnswers = (random, perfectMatch, equalValues) => {
-  const correctNumbersTotal = perfectMatch + equalValues;
-  if (perfectMatch === random.length) {
-    <Header as='h5' content='you won' />;
-    // console.log('you won');
+const Feedback = ({ random, gameMatch, perfectMatch, equalValues }) => {
+  // const correctNumbersTotal = perfectMatch + equalValues;
+  if (gameMatch) {
+    return (
+      <div>
+        <Header disabled as='h5' content='Congrats! You hacked the code' />
+      </div>
+    );
   } else if (perfectMatch === 0 && equalValues === 0) {
-    <Header as='h5' content='all are incorrect' />;
-    // console.log('all are incorrect');
-  } else if (perfectMatch !== 0 || equalValues !== 0) {
-    <Header as='h5' content='blabla' />;
-    // console.log(
-    //   `${correctNumbersTotal} correct numbers and ${+perfectMatch} correct  location`
-    // );
+    return (
+      <div>
+        <Header disabled as='h5' content='All are incorrect' />;
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <Header
+          disabled
+          as='h5'
+          content={`${equalValues} correct numbers and ${+perfectMatch} correct
+        location`}
+        />
+      </div>
+    );
   }
-};
-
-const Feedback = ({ random, perfectMatch, equalValues }) => {
-  return (
-    <FeedbackBasedOnAnswers
-      random={random}
-      perfectMatch={perfectMatch}
-      equalValues={equalValues}
-    />
-  );
 };
 
 export default Feedback;

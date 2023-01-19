@@ -1,38 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Header, Loader, Icon, Button, Message } from 'semantic-ui-react';
+import { Header, Loader, Button } from 'semantic-ui-react';
 import SecretCode from '../components/secretCode';
 import GameRecords from '../components/gameRecords';
 import AttempsCount from '../components/attempsCount';
+import Counter from '../components/counter';
 import { getRandomNumber } from '../callApi';
 import { MAX_ATTEMPTS, num } from '../config';
-import { compareGuessVsRandom } from '../utils/compareGuessVsRandom';
+import { compareGuessVsRandom1 } from '../utils/compareGuessVsRandom';
+import '../assets/styles.css';
 
-const Counter = ({ count, increment, decrement }) => {
-  return (
-    <article className='number-wrap'>
-      <Header as='h1' content={count} />
-      <Button.Group icon size='small'>
-        <Button onClick={decrement} disabled={count <= 0}>
-          <Icon name='minus' />
-        </Button>
-        <Button onClick={increment} disabled={count >= 7}>
-          <Icon name='plus' />
-        </Button>
-      </Button.Group>
-    </article>
-  );
-};
-//steps:
-//computer pick a random number
-//random number gets stored in variable
-//User types a number with guessing
-// User hits "try"
-//Chosen number gets stored in variable
-//Numbers are converted into comparable formats
-//Numbers are compared
-//app identify  similarity and location
-//app gives feedback
-//lock unlocks if code has been guessed
 //TODO: right now the play new game btn stays disabled until player wins. It needs to be possible for player to start a new game at any time
 //TODO: Check why each time a number changes before submitting answer the function is executed again - line 60
 
@@ -70,7 +46,7 @@ const Game = () => {
 
   const submitNumber = () => {
     const countToArrOfStr = [...count.join('').split('')];
-    const { gameMatch, perfectMatch, equalValues } = compareGuessVsRandom(
+    const { gameMatch, perfectMatch, equalValues } = compareGuessVsRandom1(
       countToArrOfStr,
       random
     );
@@ -83,6 +59,7 @@ const Game = () => {
   return (
     <div className='game-container'>
       <Header
+        className='game-page-instructions'
         as='h4'
         content={
           isLoading ? (
@@ -90,14 +67,17 @@ const Game = () => {
               <Loader active inline='centered' />
             </>
           ) : (
-            `Find out the secret ${num}-digit code. Start playing!`
+            <Header
+              as='h3'
+              content={`Start guessing the ${num} digits of the secret code. Numbers are from 0 to 7 and repeats are allowed.`}
+            />
           )
         }
       />
       <section>
         <SecretCode random={random} />
       </section>
-      <section style={{ paddingTop: '5px' }}>
+      <section className='attempts-count-section'>
         <AttempsCount attempsLeft={MAX_ATTEMPTS - records.length} />
       </section>
       <div style={{ display: 'flex' }} className='user-guesses-container'>
@@ -118,18 +98,10 @@ const Game = () => {
         >
           Check Answer
         </Button>
-        <Button color='violet' basic onClick={playNewGame}>
+        <Button basic onClick={playNewGame}>
           Play New Game
         </Button>
       </div>
-      {/* <div>
-        {exactMatches === random.length ? (
-          <Message floating compact positive content='WOW You are a winner!' />
-        ) : (
-          <Message content='keep trying' />
-        )}
-      </div> */}
-
       <GameRecords records={records} random={random} />
     </div>
   );
