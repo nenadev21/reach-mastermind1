@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Header, Loader, Button } from 'semantic-ui-react';
 import SecretCode from '../components/secretCode';
-import GameRecords from '../components/gameRecords';
+import GameRecordsNew from '../components/gameRecords';
 import AttempsCount from '../components/attempsCount';
 import Counter from '../components/counter';
 import { getRandomNumber } from '../callApi';
@@ -107,7 +107,7 @@ const Game = () => {
           Play New Game
         </Button>
       </div>
-      <GameRecords records={records} random={random} />
+      <GameRecordsNew records={records} random={random} />
     </div>
   );
 };

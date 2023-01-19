@@ -23,7 +23,6 @@ export function compareGuessVsRandom(values, random) {
     }
   }
 
-  console.log(exactMatches, matchesByValue);
   // if all checks pass, the arrays are a match
   return {
     gameMatch: exactMatches.length === random.length,
