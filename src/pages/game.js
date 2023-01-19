@@ -60,7 +60,6 @@ const Game = () => {
     <div className='game-container'>
       <Header
         className='game-page-instructions'
-        as='h4'
         content={
           isLoading ? (
             <>
