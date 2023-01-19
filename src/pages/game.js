@@ -22,7 +22,7 @@ const Game = () => {
 
   const playNewGame = async () => {
     setIsLoading(true);
-    const getNewRandom = await getRandomNumber(8);
+    const getNewRandom = await getRandomNumber(4);
     setRandom(getNewRandom);
     setIsLoading(false);
     setRecords([]);
