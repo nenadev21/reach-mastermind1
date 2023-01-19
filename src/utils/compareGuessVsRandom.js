@@ -39,8 +39,6 @@ export function compareGuessVsRandom2(values, random) {
   };
 }
 
-//Dani's try
-
 //contrains: arrays are the same length, arrays can have integers between 0-7, arrays can have duplicates
 //goals:
 //count values that are common between the two arrays.
