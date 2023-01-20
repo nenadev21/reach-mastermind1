@@ -10,7 +10,8 @@ It has a home page with two buttons: one for instructions and one to start the g
 
 The second page is the game page, where users will use the up and down buttons to select their answers.
 
-![Raise app]("https://user-images.githubusercontent.com/69801600/213639269-4c9b3e37-e8e9-4780-af77-620129e1b807.png")
+![Raise app](https://user-images.githubusercontent.com/69801600/213645503-a2a36626-ec67-40fb-8c19-0f818950016d.png)
+![]()
 
 ## The App's Users
 
