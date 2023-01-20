@@ -1,39 +1,44 @@
 import React, { useEffect, useState } from 'react';
-import { Header, Loader, Button } from 'semantic-ui-react';
+import {
+  Header,
+  Loader,
+  Button,
+  MenuItem,
+  Menu,
+  MenuHeader,
+} from 'semantic-ui-react';
 import SecretCode from '../components/secretCode';
 import GameRecordsNew from '../components/gameRecords';
 import AttempsCount from '../components/attempsCount';
 import Counter from '../components/counter';
 import { getRandomNumber } from '../callApi';
-import { MAX_ATTEMPTS } from '../config';
+import { MAX_ATTEMPTS, difficulties } from '../config';
 import { compareGuessVsRandom } from '../utils/compareGuessVsRandom';
 import '../assets/styles.css';
-
-//TODO: right now the play new game btn stays disabled until player wins. It needs to be possible for player to start a new game at any time
-//TODO: Check why each time a number changes before submitting answer the function is executed again - line 60
+import Navbar from '../components/navbar';
 
 const Game = () => {
   const [random, setRandom] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  //count can be change for choice because it will be the complete guess
   const [count, setCount] = useState([0, 0, 0, 0]);
   const [records, setRecords] = useState([]);
   const [endGame, setEndGame] = useState(false);
+  const [difficulty, setDifficulty] = useState(difficulties[1].value);
 
   const playNewGame = async () => {
     setIsLoading(true);
-    const getNewRandom = await getRandomNumber(4);
+    const getNewRandom = await getRandomNumber(difficulty);
     setRandom(getNewRandom);
     setIsLoading(false);
     setRecords([]);
-    setCount([0, 0, 0, 0]);
+    setCount(Array.from({ length: difficulty }, () => 0));
     setEndGame(false);
     setIsLoading(false);
   };
 
   useEffect(() => {
     playNewGame();
-  }, []);
+  }, [difficulty]);
 
   const increment = (pos) => {
     // se itera el arreglo y solo se modifica el número de la posición recibida como argumento
@@ -65,6 +70,21 @@ const Game = () => {
 
   return (
     <div className='game-container'>
+      <Menu widths={12} inverted>
+        <MenuItem position='right'>Home</MenuItem>
+        <MenuHeader>Level</MenuHeader>
+        <MenuItem>
+          <select
+            value={difficulty}
+            onChange={(e) => setDifficulty(e.target.value)}
+            style={{ width: '80px', display: 'flex' }}
+          >
+            {difficulties.map((diff) => {
+              return <option value={diff.value}>{diff.name}</option>;
+            })}
+          </select>
+        </MenuItem>
+      </Menu>
       <Header
         className='game-page-instructions'
         content={
@@ -75,7 +95,7 @@ const Game = () => {
           ) : (
             <Header
               as='h3'
-              content={`Guess the secret code. The secret code might have repeats and its numbers go from 0 to 7. You can try 10 different combinations`}
+              content={`It's time to play! Guess the secret code. The secret code contains numbers from 0 to 7 and can have repeats. In each game, you can try 10 different combinations.`}
             />
           )
         }
@@ -108,6 +128,7 @@ const Game = () => {
           Play New Game
         </Button>
       </div>
+
       <GameRecordsNew records={records} random={random} />
     </div>
   );

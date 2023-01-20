@@ -8,7 +8,7 @@ const Instructions = () => {
       key: 1,
       title: 'Objective',
       description:
-        'Your goal is to discover the correct sequence of numbers in the fewest tries possible. The secret code includes numbers from 0 until 7 and it can include repeats.',
+        'Your goal is to discover the correct sequence of numbers in the fewest tries possible. The secret code includes numbers from 0 to 7 and it can include repeats.',
       icon: 'target',
     },
     {
@@ -22,7 +22,7 @@ const Instructions = () => {
       key: 3,
       title: 'Outputs',
       description:
-        'You will receive feedback on each attempt. The game will tell you if a number is correct or a number and its location are correct. That will help you guess the secret code.',
+        'You will receive feedback on each attempt. The game will tell you if a number is correct or if a number and its location are correct. This will help you guess the secret code.',
       icon: 'gem',
     },
   ];

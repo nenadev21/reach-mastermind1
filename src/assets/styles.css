@@ -56,7 +56,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 50px;
+  padding: 50px;
   font-size: medium;
 }
 
@@ -64,6 +64,14 @@ body {
   text-align: center;
   max-width: 120vh;
   padding-bottom: 50px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  padding: 12px;
+  background-color: aqua;
 }
 
 .instructions-container {
