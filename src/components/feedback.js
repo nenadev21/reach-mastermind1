@@ -31,16 +31,6 @@ const Feedback = ({
         <Header disabled as='h5' content='All are incorrect. Keep trying!' />
       </div>
     );
-  } else if (attemptsLeft === 0) {
-    return (
-      <div>
-        <Header
-          disabled
-          as='h5'
-          content={`No more attempts left. The secret code was ${count} Play a new game.`}
-        />
-      </div>
-    );
   } else {
     return (
       <div>
