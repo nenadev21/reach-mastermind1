@@ -48,16 +48,16 @@ This project is built using React.js and makes use of the following technologies
 
 These were the steps followed during the process of creating this Web App:
 
-1.- Understand the game and its users, review existing products on the market
-2.- Describe a "persona" who might be the game's user and the desired UX
-3.- List user stories and possible features, prioritize them
-4.- Evaluate happy path and edge cases
-5.- Develop alternatives for a low-fidelity UI on paper
-6.- Select the tech stack
-7.- Build the project structure
-8.- Start coding
-9.- Test the app with users and gather feedback
-10.- Reevaluate the UI based on feedback and update code
+- Understand the game and its users, review existing products on the market
+- Describe a "persona" who might be the game's user and the desired UX
+- List user stories and possible features, prioritize them
+- Evaluate happy path and edge cases
+- Develop alternatives for a low-fidelity UI on paper
+- Select the tech stack
+- Build the project structure
+- Start coding
+- Test the app with users and gather feedback
+- Reevaluate the UI based on feedback and update code
 
 ## Code Structure
 
