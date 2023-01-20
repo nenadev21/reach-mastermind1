@@ -44,21 +44,25 @@ This project is built using React.js and makes use of the following technologies
 - semantic-ui-react
 - random number generator API
 
-## Browser Support
+## The Process
 
-This project is supported in the following browsers:
+These were the steps followed during the process of creating this Web App:
 
-- production: >0.2%, not dead, not op_mini all
-- development: last 1 chrome version, last 1 firefox version, last 1 safari version
+1.- Understand the game and its users, review existing products on the market
+2.- Describe a "persona" who might be the game's user and the desired UX
+3.- List user stories and possible features, prioritize them
+4.- Evaluate happy path and edge cases
+5.- Develop alternatives for a low-fidelity UI on paper
+6.- Select the tech stack
+7.- Build the project structure
+8.- Start coding
+9.- Test the app with users and gather feedback
+10.- Reevaluate the UI based on feedback and update code
 
-## Contributing
+## Code Structure
 
-If you would like to contribute to this project, please fork the repository and make a pull request with your changes.
+![Code](https://user-images.githubusercontent.com/69801600/213649149-3a4e809f-5e3c-42d6-9c86-f874fed7e46a.png)
 
-## License
+## Extensions Attempted or Implemented
 
-This project is under the [private] license.
-
-## Acknowledgements
-
-Thanks to [OpenAI] for providing the training data for this project.
+In addition to the project instructions, I was able to implement user-selected difficulty levels. I was halfway through implementing modals to inform users of the end of the game.
