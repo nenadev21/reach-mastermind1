@@ -2,8 +2,9 @@ import React from 'react';
 import { Label, List, Header } from 'semantic-ui-react';
 import Feedback from './feedback';
 import '../assets/styles.css';
+import { MAX_ATTEMPTS } from '../config';
 
-const GameRecordsNew = ({ records, random }) => {
+export default function GameRecords({ records, random, attemptsLeft, count }) {
   return (
     <div>
       {records.map((record, index) => (
@@ -16,11 +17,13 @@ const GameRecordsNew = ({ records, random }) => {
                 </Label>
               </List.Header>
               <Feedback
+                count={count}
                 random={random}
                 gameMatch={record.gameMatch}
                 allIncorrect={record.allIncorrect}
                 correctNumberCount={record.correctNumberCount}
                 correctPositionCount={record.correctPositionCount}
+                attemptsLeft={attemptsLeft}
               />
             </List.Content>
           </List.Item>
@@ -28,6 +31,4 @@ const GameRecordsNew = ({ records, random }) => {
       ))}
     </div>
   );
-};
-
-export default GameRecordsNew;
+}

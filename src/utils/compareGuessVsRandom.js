@@ -36,17 +36,3 @@ export function compareGuessVsRandom(values, random) {
 //goals:
 //count values that are common between the two arrays.
 // count values that are the same value AND are located in the same position of the arrays.
-
-//TESTS
-const myArr2 = [1, 4, 2, 2, 7];
-const myArr1 = [0, 2, 2, 2, 1];
-console.log(compareGuessVsRandom(myArr1, myArr2)); //false, false, 3 correct numbers, 2 correct position DA ERROR CUANDO REFERENCIA TIENE REPETIDOS???!!!
-const rand = [0, 1, 3, 5];
-const guesses1 = [2, 2, 4, 6]; //game responds “all incorrect” //allIncorrect = true
-const guesses2 = [0, 2, 4, 6]; //game responds “1 correct number and 1 correct location”
-const guesses3 = [2, 2, 1, 1]; //game responds “1 correct number and 0 correct location”
-const guesses4 = [0, 1, 5, 6]; //game responds “3 correct numbers and 2 correct location”
-console.log(compareGuessVsRandom(guesses1, rand));
-console.log(compareGuessVsRandom(guesses2, rand));
-console.log(compareGuessVsRandom(guesses3, rand));
-console.log(compareGuessVsRandom(guesses4, rand));

@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom';
 import '../assets/styles.css';
 import Instructions from '../components/instructions';
 
-//TODO: Can I create a function that can help me display the home btns without needing to repeat code?
-
 const Home = () => {
   const [displayInstructions, setDisplayInstructions] = useState(false);
 
@@ -19,6 +17,7 @@ const Home = () => {
             className='home-btn'
             basic
             color='violet'
+            size='huge'
             onClick={() => setDisplayInstructions(!displayInstructions)}
           >
             How to Play
@@ -26,18 +25,8 @@ const Home = () => {
         </Link>
         {displayInstructions && <Instructions />}
         <Link to='/game' className='home-btn-wrapper'>
-          <Button className='home-btn' color='purple'>
+          <Button className='home-btn' color='purple' size='big'>
             Play
-          </Button>
-        </Link>
-        <Link className='home-btn-wrapper'>
-          <Button className='home-btn' basic color='violet'>
-            Rewards
-          </Button>
-        </Link>
-        <Link className='home-btn-wrapper'>
-          <Button className='home-btn' basic color='violet'>
-            Settings
           </Button>
         </Link>
       </section>

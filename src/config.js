@@ -9,7 +9,7 @@ export const api_URL = `${api_ENDPOINT}?num=${num}&min=${min}&max=${max}&col=1&b
 export const MAX_ATTEMPTS = 10;
 
 export const difficulties = [
-  { text: 'Easy', name: 'Easy', value: 3 },
-  { text: 'Medium', name: 'Medium', value: 4 },
-  { text: 'Hard', name: 'Hard', value: 5 },
+  { text: 'Easy', name: 'Easy', value: 2 },
+  { text: 'Medium', name: 'Medium', value: 3 },
+  { text: 'Hard', name: 'Hard', value: 4 },
 ];

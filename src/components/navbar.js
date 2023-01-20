@@ -1,19 +1,34 @@
-import React, { useState } from 'react';
-import { Menu, Dropdown } from 'semantic-ui-react';
+import React from 'react';
+import { Menu, Dropdown, MenuItem } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = ({ difficulties, playNewGame, setDifficulty }) => {
+  const handleDifficultyChange = (e, data) => {
+    setDifficulty(data.value);
+  };
+
   return (
-    <Menu secondary horizontal>
-      <Menu.Item name='home' />
-      <Menu.Item name='settings' />
-      <Dropdown pointing text='Display Options'>
-        <Dropdown.Menu>
-          <Dropdown.Header>Level</Dropdown.Header>
-          <Dropdown.Item>Easy</Dropdown.Item>
-          <Dropdown.Item>Medium</Dropdown.Item>
-          <Dropdown.Item>Hard</Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
+    <Menu stackable fluid size='large'>
+      <Link to='/'>
+        <MenuItem name='home'>Home</MenuItem>
+      </Link>
+
+      <Dropdown
+        position='right'
+        item
+        style={{ border: 'none' }}
+        selection
+        text='Level'
+        onChange={handleDifficultyChange}
+        options={difficulties}
+      />
+      <MenuItem
+        onClick={playNewGame}
+        style={{ color: 'purple' }}
+        position='right'
+      >
+        Play New Game
+      </MenuItem>
     </Menu>
   );
 };

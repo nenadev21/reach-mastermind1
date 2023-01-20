@@ -2,7 +2,7 @@ import React from 'react';
 import { Label } from 'semantic-ui-react';
 
 const CurrentLevel = ({ difficulty }) => {
-  if (difficulty === 3) {
+  if (difficulty === 2) {
     return (
       <small>
         You are playing in level{' '}
@@ -11,7 +11,7 @@ const CurrentLevel = ({ difficulty }) => {
         </Label>
       </small>
     );
-  } else if (difficulty === 4) {
+  } else if (difficulty === 3) {
     return (
       <small>
         You are playing in level{' '}

@@ -1,21 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Header,
-  Loader,
-  Button,
-  MenuItem,
-  Menu,
-  Dropdown,
-} from 'semantic-ui-react';
+import { Header, Loader, Button } from 'semantic-ui-react';
 import SecretCode from '../components/secretCode';
-import GameRecordsNew from '../components/gameRecords';
-import AttempsCount from '../components/attempsCount';
+import GameRecords from '../components/gameRecords';
+import AttemptsCount from '../components/attemptsCount';
 import Counter from '../components/counter';
 import { getRandomNumber } from '../callApi';
 import { MAX_ATTEMPTS, difficulties } from '../config';
 import { compareGuessVsRandom } from '../utils/compareGuessVsRandom';
 import '../assets/styles.css';
 import CurrentLevel from '../components/currentLevel';
+import Navbar from '../components/navbar';
 
 const Game = () => {
   const [random, setRandom] = useState([]);
@@ -23,7 +17,7 @@ const Game = () => {
   const [count, setCount] = useState([0, 0, 0, 0]);
   const [records, setRecords] = useState([]);
   const [endGame, setEndGame] = useState(false);
-  const [difficulty, setDifficulty] = useState(difficulties[1].value);
+  const [difficulty, setDifficulty] = useState(difficulties[0].value);
 
   const playNewGame = async () => {
     setIsLoading(true);
@@ -41,8 +35,6 @@ const Game = () => {
   }, [difficulty]);
 
   const increment = (pos) => {
-    // se itera el arreglo y solo se modifica el número de la posición recibida como argumento
-    // por ejemplo si pos = 2, se deberia modificar solo el tercer el elemento del arreglo
     setCount((count) => count.map((c, index) => (index === pos ? c + 1 : c)));
   };
   const decrement = (pos) => {
@@ -68,29 +60,13 @@ const Game = () => {
     console.log('random:', random);
   };
 
-  const handleDifficultyChange = (e, data) => {
-    setDifficulty(data.value);
-  };
-
   return (
     <div className='game-container'>
-      <Menu stackable fluid size='large'>
-        <MenuItem name='home' position='right'>
-          Home
-        </MenuItem>
-        <Dropdown
-          item
-          position='right'
-          style={{ border: 'none' }}
-          selection
-          text='Level'
-          onChange={handleDifficultyChange}
-          options={difficulties}
-        />
-        <MenuItem onClick={playNewGame} style={{ color: 'purple' }}>
-          Play New Game
-        </MenuItem>
-      </Menu>
+      <Navbar
+        difficulties={difficulties}
+        playNewGame={playNewGame}
+        setDifficulty={setDifficulty}
+      />
       <Header
         className='game-page-instructions'
         content={
@@ -110,18 +86,20 @@ const Game = () => {
         <SecretCode random={random} />
       </section>
       <section className='attempts-count-section'>
-        <AttempsCount attempsLeft={MAX_ATTEMPTS - records.length} />
+        <AttemptsCount attemptsLeft={MAX_ATTEMPTS - records.length} />
       </section>
-      <div style={{ display: 'flex' }} className='user-guesses-container'>
-        {count.map((c, index) => (
-          <Counter
-            key={index}
-            count={c}
-            increment={() => increment(index)}
-            decrement={() => decrement(index)}
-          />
-        ))}
-      </div>
+      <section>
+        <div style={{ display: 'flex' }} className='user-guesses-container'>
+          {count.map((c, index) => (
+            <Counter
+              key={index}
+              count={c}
+              increment={() => increment(index)}
+              decrement={() => decrement(index)}
+            />
+          ))}
+        </div>
+      </section>
       <Button
         color='purple'
         onClick={submitNumber}
@@ -130,7 +108,12 @@ const Game = () => {
         Check Answer
       </Button>
       <div className='confirmation-btns'></div>
-      <GameRecordsNew records={records} random={random} />
+      <GameRecords
+        records={records}
+        random={random}
+        attemptsLeft={MAX_ATTEMPTS - records.length}
+        count={count}
+      />
       <CurrentLevel difficulty={difficulty} />
     </div>
   );

@@ -31,8 +31,9 @@ body {
 }
 
 .home-btn {
-  width: 150px;
-  height: 40px;
+  width: 180px;
+  height: 50px;
+  padding: 10px;
 }
 
 .attempts-count-section {
