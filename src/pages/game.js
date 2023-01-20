@@ -5,7 +5,7 @@ import {
   Button,
   MenuItem,
   Menu,
-  MenuHeader,
+  Dropdown,
 } from 'semantic-ui-react';
 import SecretCode from '../components/secretCode';
 import GameRecordsNew from '../components/gameRecords';
@@ -15,7 +15,7 @@ import { getRandomNumber } from '../callApi';
 import { MAX_ATTEMPTS, difficulties } from '../config';
 import { compareGuessVsRandom } from '../utils/compareGuessVsRandom';
 import '../assets/styles.css';
-import Navbar from '../components/navbar';
+import CurrentLevel from '../components/currentLevel';
 
 const Game = () => {
   const [random, setRandom] = useState([]);
@@ -65,24 +65,30 @@ const Game = () => {
       correctPositionCount,
     };
     setRecords((records) => [record, ...records]);
-    // console.log('random:', random);
+    console.log('random:', random);
+  };
+
+  const handleDifficultyChange = (e, data) => {
+    setDifficulty(data.value);
   };
 
   return (
     <div className='game-container'>
-      <Menu widths={12} inverted>
-        <MenuItem position='right'>Home</MenuItem>
-        <MenuHeader>Level</MenuHeader>
-        <MenuItem>
-          <select
-            value={difficulty}
-            onChange={(e) => setDifficulty(e.target.value)}
-            style={{ width: '80px', display: 'flex' }}
-          >
-            {difficulties.map((diff) => {
-              return <option value={diff.value}>{diff.name}</option>;
-            })}
-          </select>
+      <Menu stackable fluid size='large'>
+        <MenuItem name='home' position='right'>
+          Home
+        </MenuItem>
+        <Dropdown
+          item
+          position='right'
+          style={{ border: 'none' }}
+          selection
+          text='Level'
+          onChange={handleDifficultyChange}
+          options={difficulties}
+        />
+        <MenuItem onClick={playNewGame} style={{ color: 'purple' }}>
+          Play New Game
         </MenuItem>
       </Menu>
       <Header
@@ -116,20 +122,16 @@ const Game = () => {
           />
         ))}
       </div>
-      <div className='confirmation-btns'>
-        <Button
-          color='purple'
-          onClick={submitNumber}
-          disabled={records.length >= MAX_ATTEMPTS || endGame}
-        >
-          Check Answer
-        </Button>
-        <Button basic onClick={playNewGame}>
-          Play New Game
-        </Button>
-      </div>
-
+      <Button
+        color='purple'
+        onClick={submitNumber}
+        disabled={records.length >= MAX_ATTEMPTS || endGame}
+      >
+        Check Answer
+      </Button>
+      <div className='confirmation-btns'></div>
       <GameRecordsNew records={records} random={random} />
+      <CurrentLevel difficulty={difficulty} />
     </div>
   );
 };

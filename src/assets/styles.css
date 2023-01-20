@@ -106,3 +106,7 @@ body {
 .past-record-num {
   justify-content: space-between;
 }
+
+small {
+  padding: 20px;
+}
