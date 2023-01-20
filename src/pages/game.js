@@ -57,7 +57,7 @@ const Game = () => {
       correctPositionCount,
     };
     setRecords((records) => [record, ...records]);
-    console.log('random:', random);
+    // console.log('random:', random);
   };
 
   return (
