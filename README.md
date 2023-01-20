@@ -2,6 +2,10 @@
 
 Raise! is a clone of the Mastermind game, a classic code-breaking game.
 
+![Home page](https://user-images.githubusercontent.com/69801600/213637508-8fad3ea8-1a4e-4e2e-94d5-60f7cc1f007f.png)
+
+![Game page](https://user-images.githubusercontent.com/69801600/213638054-39282242-95df-458b-abc9-5af7aad752ff.png)
+
 ## Installation
 
 To install the dependencies for this project, run the following command:
